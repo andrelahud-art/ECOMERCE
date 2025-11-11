@@ -1,0 +1,17 @@
+{
+  "name": "rematesonlines",
+  "private": true,
+  "packageManager": "pnpm@9.0.0",
+  "scripts": {
+    "dev": "pnpm --filter @ro/web dev",
+    "build": "pnpm --filter @ro/web build",
+    "start": "pnpm --filter @ro/web start",
+    "db:push": "pnpm --filter @ro/web prisma db push",
+    "db:migrate": "pnpm --filter @ro/web prisma migrate dev --name init",
+    "seed": "pnpm --filter @ro/web prisma db seed"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
