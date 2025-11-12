@@ -1,8 +1,24 @@
+import type { Prisma } from "@prisma/client";
 import { prisma } from "@/server/db";
 import Link from "next/link";
 
+type AdminOrder = Prisma.OrderGetPayload<{
+  include: {
+    items: {
+      include: {
+        variant: {
+          include: {
+            product: true;
+          };
+        };
+      };
+    };
+    shipment: true;
+  };
+}>;
+
 export default async function Admin() {
-  const orders = await prisma.order.findMany({
+  const orders: AdminOrder[] = await prisma.order.findMany({
     orderBy: { createdAt: "desc" },
     take: 100,
     include: {
@@ -21,11 +37,11 @@ export default async function Admin() {
 
   const stats = {
     total: orders.length,
-    paid: orders.filter(o => o.paymentStatus === "APPROVED").length,
-    shipped: orders.filter(o => o.status === "SHIPPED").length,
+    paid: orders.filter(order => order.paymentStatus === "APPROVED").length,
+    shipped: orders.filter(order => order.status === "SHIPPED").length,
     revenue: orders
-      .filter(o => o.paymentStatus === "APPROVED")
-      .reduce((sum, o) => sum + Number(o.grandTotal), 0)
+      .filter(order => order.paymentStatus === "APPROVED")
+      .reduce((sum, order) => sum + Number(order.grandTotal), 0)
   };
 
   return (

@@ -25,7 +25,6 @@ cat > apps/web/package.json <<'JSON'
     "@tanstack/react-query": "^5.59.0",
     "@upstash/ratelimit": "^1.1.3",
     "@upstash/redis": "^1.34.3",
-    "@uploadthing/react": "^6.7.2",
     "@vercel/analytics": "^1.3.1",
     "@vercel/speed-insights": "^1.0.12",
     "algoliasearch": "^4.24.0",
