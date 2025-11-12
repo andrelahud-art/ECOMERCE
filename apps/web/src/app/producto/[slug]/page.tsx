@@ -1,9 +1,10 @@
 import { prisma } from "@/server/db";
 import { notFound } from "next/navigation";
 
-export default async function PDP({ params }: { params: { slug: string } }) {
+export default async function PDP({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const p = await prisma.product.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     include: { variants: { include: { prices: true, inventory: true } }, assets: true }
   });
   if (!p) return notFound();

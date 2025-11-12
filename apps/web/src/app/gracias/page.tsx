@@ -3,11 +3,12 @@ import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 
 interface Props {
-  searchParams: { orderId?: string };
+  searchParams: Promise<{ orderId?: string }>;
 }
 
 export default async function ThankYouPage({ searchParams }: Props) {
-  const orderId = searchParams.orderId;
+  const params = await searchParams;
+  const orderId = params.orderId;
 
   if (!orderId) {
     redirect("/");

@@ -1,11 +1,12 @@
 import Link from "next/link";
 
 interface Props {
-  searchParams: { orderId?: string };
+  searchParams: Promise<{ orderId?: string }>;
 }
 
-export default function CheckoutErrorPage({ searchParams }: Props) {
-  const orderId = searchParams.orderId;
+export default async function CheckoutErrorPage({ searchParams }: Props) {
+  const params = await searchParams;
+  const orderId = params.orderId;
 
   return (
     <div className="mx-auto max-w-2xl">
