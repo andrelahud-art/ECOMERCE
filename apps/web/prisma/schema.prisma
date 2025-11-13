@@ -21,7 +21,11 @@ model User {
   orders    Order[]
 }
 
-enum Role { ADMIN OPS CUSTOMER }
+enum Role {
+  ADMIN
+  OPS
+  CUSTOMER
+}
 
 model Account {
   id                String  @id @default(cuid())
@@ -79,8 +83,17 @@ model Product {
   assets       Asset[]
 }
 
-enum Condition { NEW OPENBOX REFURB }
-enum Grade { A B C }
+enum Condition {
+  NEW
+  OPENBOX
+  REFURB
+}
+
+enum Grade {
+  A
+  B
+  C
+}
 
 model ProductVariant {
   id        String  @id @default(cuid())
@@ -119,7 +132,11 @@ model Price {
   endAt     DateTime?
   variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
 }
-enum Channel { WEB ML }
+
+enum Channel {
+  WEB
+  ML
+}
 
 model Order {
   id            String        @id @default(cuid())
@@ -142,8 +159,22 @@ model Order {
   items         OrderItem[]
   shipment      Shipment?
 }
-enum OrderStatus { DRAFT PAID PICKING SHIPPED DELIVERED RETURNED }
-enum PaymentStatus { PENDING APPROVED REJECTED REFUNDED }
+
+enum OrderStatus {
+  DRAFT
+  PAID
+  PICKING
+  SHIPPED
+  DELIVERED
+  RETURNED
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  REFUNDED
+}
 
 model OrderItem {
   id        String  @id @default(cuid())
@@ -180,7 +211,12 @@ model Asset {
   product      Product? @relation(fields: [productId], references: [id])
   variant      ProductVariant? @relation(fields: [variantId], references: [id])
 }
-enum AssetType { IMG VIDEO PDF }
+
+enum AssetType {
+  IMG
+  VIDEO
+  PDF
+}
 
 model AuditLog {
   id      String   @id @default(cuid())
