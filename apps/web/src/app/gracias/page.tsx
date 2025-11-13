@@ -1,6 +1,7 @@
 import { prisma } from "@/server/db";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import type { Route } from "next";
 
 interface Props {
   searchParams: Promise<{ orderId?: string }>;
@@ -224,7 +225,7 @@ export default async function ThankYouPage({ searchParams }: Props) {
           Seguir comprando
         </Link>
         <Link
-          href="/soporte"
+          href={"/soporte" as Route}
           className="flex-1 text-center rounded-xl border border-zinc-300 bg-white px-6 py-3 font-semibold hover:bg-zinc-50 transition"
         >
           ¿Necesitas ayuda?
